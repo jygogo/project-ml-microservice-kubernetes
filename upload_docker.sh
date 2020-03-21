@@ -11,8 +11,8 @@ dockerpath=jygogo/project-ml-microservice-kubernetes
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 docker login --username=jygogo
-docker tag makeprediction $dockerpath:make_prediction_v2
+docker tag makeprediction $dockerpath:make_prediction_v3
 
 # Step 3:
 # Push image to a docker repository
-docker push $dockerpath:make_prediction_v2
+docker push $dockerpath:make_prediction_v3

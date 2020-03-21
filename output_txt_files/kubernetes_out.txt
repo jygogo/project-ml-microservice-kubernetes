@@ -1,1 +1,22 @@
-<paste log output from Kubernetes-mediated prediction, here>
+(.devops) ubuntu@ubuntudevops:~/project-ml-microservice-kubernetes$ kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+makeprediction-596fcb579-n6bbp   1/1     Running   0          21m
+(.devops) ubuntu@ubuntudevops:~/project-ml-microservice-kubernetes$ kubectl logs makeprediction-596fcb579-n6bbp
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 262-253-076
+[2020-03-21 12:53:53,107] INFO in app: JSON payload:
+{json_payload}
+[2020-03-21 12:53:53,112] INFO in app: Inference payload DataFrame:
+{inference_payload}
+[2020-03-21 12:53:53,112] INFO in app: Scaling Payload:
+{payload}
+[2020-03-21 12:53:53,118] INFO in app: [20.35373177134412]
+127.0.0.1 - - [21/Mar/2020 12:53:53] "POST /predict HTTP/1.1" 200 -
+(.devops) ubuntu@ubuntudevops:~/project-ml-microservice-kubernetes$
