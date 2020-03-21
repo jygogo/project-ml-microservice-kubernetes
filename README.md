@@ -66,3 +66,16 @@ kubectl run makeprediction --image=docker.io/$dockerpath:make_prediction_v3 --po
 ### Description of the files
 
 The following files are in the github repository (https://github.com/jygogo/project-ml-microservice-kubernetes.git)
+
+1. .circleci : circle CI directory
+2. model_data: Data from Kaggle for machine learning Microservice
+3. output_txt_files : log output files when calling the machine learning microservice while running the appliation on docker and   kubernetes
+4. Dockerfile: Docker image build instructions
+5. Makefile: project make file
+6. README.md: Information about the project
+7. app.py: Microservice application
+8. make_prediction.sh: Shell script to call the machine learning API
+9. requirements.txt: Project dependencies file
+10. run_docker.sh: To build and run docker image locally
+11. run_kubernetes.sh: To deploy and run the machine learning application on kubernetes cluster
+12. upload_docker.sh: To upload the docker image to docker hub
