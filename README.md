@@ -2,31 +2,32 @@
 
 ## Project Overview
 
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
+In this project you will operationalize a machine learning microservice using kubernetes, which is an open-source system for automating the management of containerized applications. In this project you will:
 
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
-
-### Project Tasks
-
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
-
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
-
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
-
----
+Test the project code using linting
+Complete a Dockerfile to containerize this application
+Deploy a containerized application using Docker and make a prediction
+Improve the log statements in the source code for this application
+Configure Kubernetes and create a Kubernetes cluster
+Deploy a container using Kubernetes and make a prediction
+Upload a complete Github repo with CircleCI to indicate that the code has been tested
 
 ## Setup the Environment
 
+You will need to create a Virtual machine using vmware workstation and install Ubuntu LTS server (Ubuntu Server 18.04.4 LTS). The ISO image can be downloaded from (https://ubuntu.com/download/server) 
+
 * Create a virtualenv and activate it
+
+```bash
+python3 -m venv ~/.devops
+source ~/.devops/bin/activate
+```
+
 * Run `make install` to install the necessary dependencies
+
+```bash
+make install
+```
 
 ### Running `app.py`
 
@@ -37,6 +38,31 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 ### Kubernetes Steps
 
 * Setup and Configure Docker locally
+
+1. wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce_19.03.8~3-0~ubuntu-bionic_amd64.de
+2. wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/containerd.io_1.2.6-3_amd64.deb
+3. wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_19.03.8~3-0~ubuntu-bionic_amd64.deb
+4. sudo dpkg -i /tmp/docker-ce-cli_19.03.8~3-0~ubuntu-bionic_amd64.deb
+5. sudo dpkg -i /tmp/containerd.io_1.2.6-3_amd64.deb
+6. sudo dpkg -i /tmp/docker-ce_19.03.8~3-0~ubuntu-bionic_amd64.deb
+
 * Setup and Configure Kubernetes locally
+
+1. sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+2. sudo chmod +x minikube
+3. sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+4. sudo chmod +x ./kubectl
+5. sudo mv ./kubectl /usr/local/bin/kubectl
+
 * Create Flask app in Container
+
+1. minikube start
+2. ./run_kubernetes.sh
+
 * Run via kubectl
+
+kubectl run makeprediction --image=docker.io/$dockerpath:make_prediction_v3 --port=8000
+
+### Description of the files
+
+The following files are in the github repository (https://github.com/jygogo/project-ml-microservice-kubernetes.git)
