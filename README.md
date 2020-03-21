@@ -39,29 +39,39 @@ make install
 
 * Setup and Configure Docker locally
 
-1. wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce_19.03.8~3-0~ubuntu-bionic_amd64.de
-2. wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/containerd.io_1.2.6-3_amd64.deb
-3. wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_19.03.8~3-0~ubuntu-bionic_amd64.deb
-4. sudo dpkg -i /tmp/docker-ce-cli_19.03.8~3-0~ubuntu-bionic_amd64.deb
-5. sudo dpkg -i /tmp/containerd.io_1.2.6-3_amd64.deb
-6. sudo dpkg -i /tmp/docker-ce_19.03.8~3-0~ubuntu-bionic_amd64.deb
-
+```bash
+wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce_19.03.8~3-0~ubuntu-bionic_amd64.de
+wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/containerd.io_1.2.6-3_amd64.deb
+wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_19.03.8~3-0~ubuntu-bionic_amd64.deb
+sudo dpkg -i /tmp/docker-ce-cli_19.03.8~3-0~ubuntu-bionic_amd64.deb
+sudo dpkg -i /tmp/containerd.io_1.2.6-3_amd64.deb
+sudo dpkg -i /tmp/docker-ce_19.03.8~3-0~ubuntu-bionic_amd64.deb
+```
 * Setup and Configure Kubernetes locally
 
+```bash
 1. sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 2. sudo chmod +x minikube
 3. sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 4. sudo chmod +x ./kubectl
 5. sudo mv ./kubectl /usr/local/bin/kubectl
+```
 
 * Create Flask app in Container
 
-1. minikube start
-2. ./run_kubernetes.sh
+```bash
+docker build --tag=makeprediction .
+docker run -d -p 8000:80 makeprediction
+```
 
 * Run via kubectl
 
+```bash
+dockerpath=jygogo/project-ml-microservice-kubernetes
+docker login --username=jygogo
 kubectl run makeprediction --image=docker.io/$dockerpath:make_prediction_v3 --port=8000
+kubectl port-forward deployment/makeprediction 8000:80
+```
 
 ### Description of the files
 
